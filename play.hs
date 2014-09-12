@@ -84,22 +84,22 @@ treeElem x (Node a left right)
 	| x > a = treeElem x right
 
 --types magic
---Ребятки-типы, принимающие один параметр, могут получить право называться функтором, если определят fmap:
+--types accepting one param can be a Functor, if fmap is defined
 class Functor' f where
 	fmap' :: (a -> b) -> f a -> f b
---например, maybe желает стать таким:
+--maybe example
 instance Functor' Maybe where
 	fmap' f (Just x) = Just (f x)
 	fmap' f Nothing = Nothing
---списки тоже хотят
+--lists example
 instance Functor' [] where
 	fmap' f l = map f l
 
---Продолжаем разговор
---Ребятки, принимающие один параметр * и один параметр * -> *, могут получить дан То-фу
+--go on
+--guys accepting one param * and one param * -> *, can get Tofu dan
 class Tofu t where
 	tofu :: j a -> t a j
---Таких желающих немного, поэтому придумаем какой-нибудь Франк
+--Frank will be the example
 data Frank a b = Frank {frankField :: b a} deriving (Show)
 
 instance Tofu Frank where
